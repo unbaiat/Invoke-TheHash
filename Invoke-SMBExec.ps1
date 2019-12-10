@@ -1,67 +1,6 @@
 function Invoke-SMBExec
 {
-<#
-.SYNOPSIS
-Invoke-SMBExec performs SMBExec style command execution with NTLMv2 pass the hash authentication. Invoke-SMBExec
-supports SMB1 and SMB2.1 with and without SMB signing.
 
-Author: Kevin Robertson (@kevin_robertson)
-License: BSD 3-Clause
-
-.PARAMETER Target
-Hostname or IP address of target.
-
-.PARAMETER Username
-Username to use for authentication.
-
-.PARAMETER Domain
-Domain to use for authentication. This parameter is not needed with local accounts or when using @domain after the
-username.
-
-.PARAMETER Hash
-NTLM password hash for authentication. This module will accept either LM:NTLM or NTLM format.
-
-.PARAMETER Command
-Command to execute on the target. If a command is not specified, the function will check to see if the username
-and hash provides local administrator access on the target.
-
-.PARAMETER CommandCOMSPEC
-Default = Enabled: Prepend %COMSPEC% /C to Command.
-
-.PARAMETER Service
-Default = 20 Character Random: Name of the service to create and delete on the target.
-
-.PARAMETER Sleep
-Default = 150 Milliseconds: Sets the function's Start-Sleep values in milliseconds. You can try tweaking this
-setting if you are experiencing strange results.
-
-.PARAMETER Session
-Inveigh-Relay authenticated session.
-
-.PARAMETER Version
-Default = Auto: (Auto,1,2.1) Force SMB version. The default behavior is to perform SMB version negotiation and use SMB2.1 if supported by the
-target.
-
-.EXAMPLE
-Execute a command.
-Invoke-SMBExec -Target 192.168.100.20 -Domain TESTDOMAIN -Username TEST -Hash F6F38B793DB6A94BA04A52F1D3EE92F0 -Command "command or launcher to execute" -verbose
-
-.EXAMPLE
-Check command execution privilege.
-Invoke-SMBExec -Target 192.168.100.20 -Domain TESTDOMAIN -Username TEST -Hash F6F38B793DB6A94BA04A52F1D3EE92F0
-
-.EXAMPLE
-Execute a command using an authenticated Inveigh-Relay session.
-Invoke-SMBExec -Session 1 -Command "command or launcher to execute"
-
-.EXAMPLE
-Check if SMB signing is required.
-Invoke-SMBExec -Target 192.168.100.20
-
-.LINK
-https://github.com/Kevin-Robertson/Invoke-TheHash
-
-#>
 [CmdletBinding(DefaultParametersetName='Default')]
 param
 (
