@@ -1,45 +1,6 @@
 function Invoke-WMIExec
 {
-<#
-.SYNOPSIS
-Invoke-WMIExec performs WMI command execution on targets using NTLMv2 pass the hash authentication.
 
-Author: Kevin Robertson (@kevin_robertson)  
-License: BSD 3-Clause 
-
-.PARAMETER Target
-Hostname or IP address of target.
-
-.PARAMETER Username
-Username to use for authentication.
-
-.PARAMETER Domain
-Domain to use for authentication. This parameter is not needed with local accounts or when using @domain after
-the username. 
-
-.PARAMETER Hash
-NTLM password hash for authentication. This module will accept either LM:NTLM or NTLM format.
-
-.PARAMETER Command
-Command to execute on the target. If a command is not specified, the function will just check to see if the
-username and hash has access to WMI on the target.
-
-.PARAMETER Sleep
-Default = 10 Milliseconds: Sets the function's Start-Sleep values in milliseconds. You can try tweaking this
-setting if you are experiencing strange results.
-
-.EXAMPLE
-Execute a command.
-Invoke-WMIExec -Target 192.168.100.20 -Domain TESTDOMAIN -Username TEST -Hash F6F38B793DB6A94BA04A52F1D3EE92F0 -Command "command or launcher to execute" -verbose
-
-.EXAMPLE
-Check command execution privilege.
-Invoke-WMIExec -Target 192.168.100.20 -Username administrator -Hash F6F38B793DB6A94BA04A52F1D3EE92F0
-
-.LINK
-https://github.com/Kevin-Robertson/Invoke-TheHash
-
-#>
 [CmdletBinding()]
 param
 (
